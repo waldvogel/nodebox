@@ -15,11 +15,13 @@ Vagrant::Config.run do |config|
 
   config.vm.box = "lucid32"
   config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  config.vm.customize ["modifyvm", :id, "--rtcuseutc", "on"]
 
   config.vm.forward_port 80, nb_config['host_port']
   config.vm.share_folder(app_name, app_path, "./")
 
   config.vm.provision :chef_solo do |chef|
+    chef.log_level = ENV['CHEF_LOG_LEVEL'] || "info"
     chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
     chef.add_recipe(recipe)
     chef.json.merge!({

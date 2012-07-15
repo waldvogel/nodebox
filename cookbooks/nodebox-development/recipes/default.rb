@@ -1,4 +1,3 @@
-
 apt_update = execute "update apt" do
   user "root"
   command "apt-get update"
@@ -22,8 +21,8 @@ include_recipe "nodejs::npm"
 node[:node_modules].each do | node_module |
   bash "npm install #{node_module}" do
     user "root"
-    code "npm install #{node_module}"
-    not_if "npm list installed | grep '^#{node_module}'"
+    code "npm install #{node_module} -g"
+    not_if "npm ls -g | grep '^#{node_module}'"
   end
 end
 
