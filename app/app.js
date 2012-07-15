@@ -1,7 +1,5 @@
-
-var fs = require('fs'),
-    http = require('http')
-;
+var fs = require('fs');
+var http = require('http');
 
 var config = JSON.parse(fs.readFileSync(__dirname + '/nodebox.json'));
 var env = config.environment;

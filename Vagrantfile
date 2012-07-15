@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-nb_config = JSON.parse(File.read('nodebox.json'))
+nb_config = JSON.parse(File.read('app/nodebox.json'))
 
 nodebox_env = nb_config['environment']
 required_modules = (nodebox_env == 'development') ? [ "supervisor" ] : []
@@ -17,8 +17,8 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
   config.vm.customize ["modifyvm", :id, "--rtcuseutc", "on"]
 
-  config.vm.forward_port 80, nb_config['host_port']
-  config.vm.share_folder(app_name, app_path, "./")
+  config.vm.forward_port 8080, nb_config['host_port']
+  config.vm.share_folder(app_name, app_path, "./app")
 
   config.vm.provision :chef_solo do |chef|
     chef.log_level = ENV['CHEF_LOG_LEVEL'] || "info"
@@ -39,4 +39,3 @@ Vagrant::Config.run do |config|
                      });
   end
 end
-
