@@ -1,0 +1,12 @@
+{
+  "app_name": "nodebox-example",
+  "environment": "development",
+  "app_port": 80,
+  "host_port": 8000,
+  "modules": [ "supervisor", 
+               "express",
+               "nodeunit",
+               "mongoose" ],
+  "node_version": "0.8.2",
+  "npm_version": "1.1.24"
+}
